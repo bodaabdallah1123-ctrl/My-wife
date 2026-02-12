@@ -3,58 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حكايتنا ❤️ عبد الله وحبيبة</title>
+    <title>إلى حبيبة قلبي ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Amiri&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #ff4d79; --dark: #0f0f0f; --accent: #d63384; }
-        body, html { margin: 0; padding: 0; font-family: 'Cairo', sans-serif; background: var(--dark); color: white; direction: rtl; overflow-x: hidden; }
+        :root {
+            --primary: #ff4d79;
+            --dark-bg: #0a0a0a;
+            --accent: #d63384;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            background: var(--dark-bg);
+            color: white;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        /* شاشة القفل بلمسة رومانسية */
+        #lock-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: transform 1s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+
+        .lock-card {
+            background: var(--glass);
+            padding: 40px 25px;
+            border-radius: 35px;
+            backdrop-filter: blur(20px);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 85%;
+            max-width: 380px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+        }
+
+        .lock-card h1 { color: var(--primary); font-size: 26px; margin-bottom: 10px; }
         
-        /* شاشة القفل */
-        #lock-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, #1a1a1a 0%, #000000 100%); display: flex; align-items: center; justify-content: center; z-index: 1000; transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1); }
-        .lock-card { background: rgba(255, 255, 255, 0.05); padding: 40px 20px; border-radius: 30px; backdrop-filter: blur(15px); text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); width: 85%; max-width: 380px; }
-        .password-input { width: 80%; padding: 15px; margin: 25px 0; border-radius: 15px; border: none; background: rgba(255, 255, 255, 0.1); color: white; text-align: center; font-size: 20px; outline: none; }
-        .login-btn { background: linear-gradient(45deg, var(--primary), var(--accent)); color: white; border: none; padding: 15px 40px; border-radius: 50px; font-weight: bold; cursor: pointer; width: 90%; font-size: 18px; }
+        .password-input {
+            width: 85%;
+            padding: 15px;
+            margin: 25px 0;
+            border-radius: 15px;
+            border: none;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            text-align: center;
+            font-size: 20px;
+            outline: none;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .login-btn {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 90%;
+            font-size: 18px;
+            box-shadow: 0 10px 20px rgba(255, 77, 121, 0.3);
+            transition: 0.3s;
+        }
 
         /* المحتوى الرئيسي */
-        #main-content { display: none; padding-bottom: 50px; }
-        .header { text-align: center; padding: 40px 20px; }
-        .heart { font-size: 70px; color: var(--primary); animation: pulse 1.5s infinite; display: inline-block; }
+        #main-content {
+            display: none;
+            padding-bottom: 60px;
+        }
+
+        .header { text-align: center; padding: 50px 20px 20px; }
+        .heart { font-size: 80px; color: var(--primary); animation: pulse 1.5s infinite; display: inline-block; }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
 
-        .timer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 0 20px; max-width: 500px; margin: 0 auto; }
-        .timer-item { background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 20px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.05); }
-        .timer-item .num { font-size: 35px; font-weight: bold; color: var(--primary); display: block; }
-        .full-width { grid-column: span 2; background: rgba(255, 77, 121, 0.1); }
+        /* العداد المطور */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 0 20px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
 
-        .player { background: rgba(255, 255, 255, 0.05); margin: 30px 20px; padding: 20px; border-radius: 25px; display: flex; align-items: center; gap: 20px; border: 1px solid rgba(255, 77, 121, 0.2); }
-        .btn-play { background: var(--primary); border: none; width: 60px; height: 60px; border-radius: 50%; color: white; font-size: 24px; cursor: pointer; }
+        .timer-item {
+            background: var(--glass);
+            padding: 25px 15px;
+            border-radius: 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
+        .timer-item .num { font-size: 38px; font-weight: bold; color: var(--primary); display: block; }
+        .timer-item .label { font-size: 14px; color: #aaa; margin-top: 5px; }
+
+        .full-width { grid-column: span 2; background: rgba(255, 77, 121, 0.15); }
+
+        /* مشغل الموسيقى */
+        .player {
+            background: var(--glass);
+            margin: 35px 20px;
+            padding: 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid rgba(255, 77, 121, 0.2);
+        }
+
+        .btn-play {
+            background: var(--primary);
+            border: none;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            color: white;
+            font-size: 26px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 121, 0.4);
+        }
+
+        /* معرض الصور */
         .gallery { padding: 20px; max-width: 600px; margin: 0 auto; }
-        .card { background: #1a1a1a; border-radius: 25px; margin-bottom: 30px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08); }
+        .card {
+            background: #111;
+            border-radius: 30px;
+            margin-bottom: 35px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
         .card img { width: 100%; height: auto; display: block; }
+        .card .info { padding: 25px; text-align: center; font-size: 17px; color: #eee; }
 
-        .message { background: white; color: #222; margin: 40px 20px; padding: 30px; border-radius: 30px; }
-        .message h3 { color: var(--primary); text-align: center; font-size: 24px; }
-        .message p { font-family: 'Amiri', serif; font-size: 20px; line-height: 1.8; text-align: justify; }
+        /* الرسالة الخاصة بك */
+        .message {
+            background: white;
+            color: #1a1a1a;
+            margin: 45px 20px;
+            padding: 35px;
+            border-radius: 35px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            position: relative;
+        }
+        .message::before {
+            content: "❤️";
+            position: absolute;
+            top: -25px;
+            right: 30px;
+            font-size: 40px;
+        }
+        .message h3 { color: var(--primary); text-align: center; font-size: 26px; margin-top: 0; }
+        .message p { font-family: 'Amiri', serif; font-size: 22px; line-height: 1.9; text-align: justify; }
+
+        .footer { text-align: center; color: var(--primary); font-weight: bold; font-size: 20px; margin-bottom: 40px; }
+        .error-msg { color: #ff4d4d; font-size: 14px; margin-top: 10px; display: none; }
     </style>
 </head>
 <body>
 
+    <!-- شاشة القفل -->
     <div id="lock-screen">
         <div class="lock-card">
-            <h1>أهلاً حبيبة قلبي ❤️</h1>
-            <p>مستعدة تشوفي المفاجأة؟</p>
-            <input type="password" id="pass-input" class="password-input" placeholder="الباسورد">
-            <button class="login-btn" onclick="check()">دخول ❤️</button>
-            <p id="error" style="color:red; display:none; margin-top:10px;">الباسورد غلط يا روحي ❤️</p>
+            <h1>مرحباً يا حبيبة قلبي ❤️</h1>
+            <p>كلمة السر هي التاريخ اللي بنحبه</p>
+            <input type="password" id="pass-input" class="password-input" placeholder="أدخلي الباسورد (2024)">
+            <button class="login-btn" onclick="check()">افتحي المفاجأة ❤️</button>
+            <p id="error" class="error-msg">الباسورد خطأ يا روحي، حاولي تاني ❤️</p>
         </div>
     </div>
 
+    <!-- المحتوى الرئيسي -->
     <div id="main-content">
         <div class="header">
             <div class="heart">❤️</div>
-            <h1 style="margin: 15px 0;">حكايتنا بدأت</h1>
-            <p style="color: var(--primary); font-weight: bold;">5 يونيو 2024</p>
+            <h1 style="margin: 15px 0; font-size: 32px;">حكايتنا بدأت</h1>
+            <p style="color: #888; font-size: 20px;">عبد الله & حبيبة</p>
+            <p style="color: var(--primary); font-weight: bold; font-size: 22px; margin-top: 5px;">5 يونيو 2024</p>
         </div>
 
         <div class="timer-grid">
@@ -64,60 +200,84 @@
             <div class="timer-item"><span class="num" id="h">0</span><span class="label">ساعات</span></div>
             <div class="timer-item full-width">
                 <span class="num" id="clock">00:00:00</span>
-                <span class="label">دقائق وثواني</span>
+                <span class="label" style="color: #eee;">دقائق وثواني</span>
             </div>
         </div>
 
         <div class="player">
             <button class="btn-play" id="play-btn" onclick="playMusic()">▶</button>
             <div>
-                <div style="font-weight: bold;">أغنيتنا المفضلة 🎵</div>
+                <div style="font-weight: bold; font-size: 16px;">أغنيتنا المفضلة 🎵</div>
+                <div style="font-size: 13px; color: #aaa;">يعشقك قلبي.. استمعي إليها</div>
             </div>
             <audio id="audio" loop src="music.mp3"></audio>
         </div>
 
         <div class="gallery">
-            <div class="card"><img src="photo1.jpg" alt="صورة 1"><div style="padding:15px; text-align:center;">أجمل لحظاتنا ❤️</div></div>
-            <div class="card"><img src="photo2.jpg" alt="صورة 2"><div style="padding:15px; text-align:center;">ضحكتك اللي بتنور حياتي 😍</div></div>
+            <div class="card">
+                <img src="photo1.jpg" alt="صورة 1" onerror="this.src='https://via.placeholder.com/600x450?text=Photo+1'">
+                <div class="info">يوم ما شوفتك.. أحلى يوم في عمري ❤️</div>
+            </div>
+            <div class="card">
+                <img src="photo2.jpg" alt="صورة 2" onerror="this.src='https://via.placeholder.com/600x450?text=Photo+2'">
+                <div class="info">ضحكتك اللي نورتني من تاني 😍</div>
+            </div>
         </div>
 
         <div class="message">
-            <h3>رسالة من قلبي 💌</h3>
-            <p>من يوم ما شوفتك كنتي رخمه اوي بس عارفه انتي يومها دخلتي قلبي يومها انا حسيت الي انا نورت من تاني بعد ماخلاص فقدت الامل الي انا مش عايز اعيش تاني بس انتي بقيتي حياتي كلها وعايش علشانك وبس ومش محتاج اي حاجه من الدنيا غيرك يارب نفضل مع بعض العمر كله. بحبك مووت اً.</p>
-            <div style="text-align: left; font-weight: bold; margin-top: 20px; color: var(--primary);">عبد الله</div>
+            <h3>من قلبي ليكي 💌</h3>
+            <p>
+                من يوم ما شوفتك كنتي رخمة أوي بس عارفة إنتي يومها دخلتي قلبي، يومها أنا حسيت إني نورت من تاني بعد ما خلاص فقدت الأمل إني مش عايز أعيش تاني.. بس إنتي بقيتي حياتي كلها وعايش عشانك وبس ومش محتاج أي حاجة من الدنيا غيرك، يا رب نفضل مع بعض العمر كله. بحبك موت.
+            </p>
         </div>
+
+        <div class="footer">بحبك، عبد الله ❤️</div>
     </div>
 
     <script>
-        // التاريخ: 5 يونيو 2024 (شهر 5 في الكود لأن العد يبدأ من صفر)
+        // التاريخ: 5 يونيو 2024
         const start = new Date(2024, 5, 5, 0, 0, 0); 
-        const pw = "2024"; // الباسورد
+        const pw = "2024"; 
 
         function check() {
-            if (document.getElementById('pass-input').value === pw) {
-                document.getElementById('lock-screen').style.transform = "translateY(-100%)";
+            const val = document.getElementById('pass-input').value;
+            if (val === pw) {
+                document.getElementById('lock-screen').style.transform = "translateY(-110%)";
                 document.getElementById('main-content').style.display = "block";
-                setTimeout(() => { document.getElementById('audio').play(); }, 500);
-            } else { document.getElementById('error').style.display = "block"; }
+                setTimeout(() => { document.getElementById('audio').play(); }, 800);
+            } else {
+                document.getElementById('error').style.display = "block";
+            }
         }
 
         function update() {
             const now = new Date();
             let diff = now - start;
+
             let years = now.getFullYear() - start.getFullYear();
             let months = now.getMonth() - start.getMonth();
             let days = now.getDate() - start.getDate();
-            if (days < 0) { months--; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
-            if (months < 0) { years--; months += 12; }
-            const h = Math.floor((diff / 3600000) % 24);
-            const mi = Math.floor((diff / 60000) % 60);
-            const s = Math.floor((diff / 1000) % 60);
+
+            if (days < 0) {
+                months--;
+                days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            const hours = Math.floor((diff / 3600000) % 24);
+            const mins = Math.floor((diff / 60000) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
+
             document.getElementById('y').innerText = years;
             document.getElementById('m').innerText = months;
             document.getElementById('d').innerText = days;
-            document.getElementById('h').innerText = h;
+            document.getElementById('h').innerText = hours;
+            
             const fmt = (n) => n < 10 ? '0' + n : n;
-            document.getElementById('clock').innerText = fmt(mi) + ":" + fmt(s);
+            document.getElementById('clock').innerText = fmt(mins) + ":" + fmt(secs);
         }
 
         function playMusic() {
@@ -125,6 +285,7 @@
             const b = document.getElementById('play-btn');
             if (a.paused) { a.play(); b.innerText = "⏸"; } else { a.pause(); b.innerText = "▶"; }
         }
+
         setInterval(update, 1000);
         update();
     </script>
